@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Smart Bus Stand Enhancement</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+    })();
+  </script>
   <style>
     :root {
       --bg: #f5f7fa;
@@ -148,6 +154,12 @@
       background: var(--accent);
       color: white;
     }
+
+    #complaintMessage {
+      display: none;
+      color: green;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -203,56 +215,39 @@
       </div>
     </section>
 
-   <section>
-  <h2>✍ Complaint</h2>
-  <form id="complaintForm">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="4" placeholder="Your complaint..." required></textarea>
-    <button type="submit">Send Complaint</button>
-    <p id="ComplaintMessage" style="color: green; display: none;">Thank you for your Complaint!</p>
-  </form>
-</section>
+    <section>
+      <h2>📣 Complaint</h2>
+      <form id="complaintForm">
+        <input type="text" name="user_name" placeholder="Your Name" required />
+        <input type="email" name="user_email" placeholder="Your Email" required />
+        <textarea name="message" rows="4" placeholder="Write your complaint..." required></textarea>
+        <button type="submit">Submit Complaint</button>
+        <p id="complaintMessage">✅ Complaint sent successfully!</p>
+      </form>
+    </section>
 
-<section>
-  <h2>📧 Stay Updated</h2>
-  <div class="card">
-    <form id="subscribeForm">
-      <input type="email" name="email" placeholder="sanketkakede@gmail.com" required />
-      <button type="submit">Subscribe</button>
-      <p id="subscribeMessage" style="color: green; display: none;">Subscribed successfully!</p>
-    </form>
+    <section>
+      <h2>📧 Stay Updated</h2>
+      <div class="card">
+        <form id="subscribeForm">
+          <input type="email" name="user_email" placeholder="Your Email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
   </div>
-</section>
-<script>
-  function toggleTheme() {
-    const theme = document.documentElement.getAttribute("data-theme");
-    document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
-  }
 
-  function openLightbox(imgElement) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = imgElement.src;
-    lightbox.style.display = 'flex';
-  }
+  <footer>
+    &copy; 2025 Smart Bus Stand Project | Created by First-Year Engineering Student
+  </footer>
 
-  function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    lightbox.style.display = 'none';
-  }
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">×</span>
+    <img src="" id="lightbox-img" alt="Image" />
+  </div>
 
-  // Feedback form handling
-  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    document.getElementById("feedbackMessage").style.display = "block";
-    this.reset();
-  });
-
-  // Subscribe form handling
-  document.getElementById("subscribeForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    document.getElementById("subscribeMessage").style.display = "block";
-    this.reset();
-  });
-</script>
+  <script>
+    function toggleTheme() {
+      const theme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" :
