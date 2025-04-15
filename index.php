@@ -3,7 +3,7 @@
 $mailSent = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = "your-email@example.com"; // <-- 🔁 Replace this with your actual email address
+    $to = "sanketkakede@gmail.com"; // <-- 🔁 Replace this with your actual email address
 
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
