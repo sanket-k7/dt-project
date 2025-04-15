@@ -203,56 +203,56 @@
       </div>
     </section>
 
-    <section>
-      <h2>✍ Feedback</h2>
-      <form method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" rows="4" placeholder="Your feedback..." required></textarea>
-        <button type="submit">Send Feedback</button>
-      </form>
-    </section>
+   <section>
+  <h2>✍ Feedback</h2>
+  <form id="feedbackForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" rows="4" placeholder="Your feedback..." required></textarea>
+    <button type="submit">Send Feedback</button>
+    <p id="feedbackMessage" style="color: green; display: none;">Thank you for your feedback!</p>
+  </form>
+</section>
 
-    <section>
-      <h2>📧 Stay Updated</h2>
-      <div class="card">
-        <form method="POST">
-          <input type="email" name="email" placeholder="Your Email" required />
-          <button type="submit">Subscribe</button>
-        </form>
-      </div>
-    </section>
-
+<section>
+  <h2>📧 Stay Updated</h2>
+  <div class="card">
+    <form id="subscribeForm">
+      <input type="email" name="email" placeholder="Your Email" required />
+      <button type="submit">Subscribe</button>
+      <p id="subscribeMessage" style="color: green; display: none;">Subscribed successfully!</p>
+    </form>
   </div>
+</section>
+<script>
+  function toggleTheme() {
+    const theme = document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+  }
 
-  <footer>
-    &copy; 2025 Smart Bus Stand Project | Created by First-Year Engineering Student
-  </footer>
+  function openLightbox(imgElement) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imgElement.src;
+    lightbox.style.display = 'flex';
+  }
 
-  <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">×</span>
-    <img src="" id="lightbox-img" alt="Image" />
-  </div>
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+  }
 
-  <script>
-    function toggleTheme() {
-      const theme = document.documentElement.getAttribute("data-theme");
-      document.documentElement.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
-    }
+  // Feedback form handling
+  document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    document.getElementById("feedbackMessage").style.display = "block";
+    this.reset();
+  });
 
-    function openLightbox(imgElement) {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-img');
-      lightboxImg.src = imgElement.src;
-      lightbox.style.display = 'flex';
-    }
-
-    function closeLightbox() {
-      const lightbox = document.getElementById('lightbox');
-      lightbox.style.display = 'none';
-    }
-  </script>
-
-</body>
-</html>
+  // Subscribe form handling
+  document.getElementById("subscribeForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    document.getElementById("subscribeMessage").style.display = "block";
+    this.reset();
+  });
+</script>
