@@ -153,7 +153,7 @@
 <body>
 
   <header>
-    <div class="theme-toggle" onclick="toggleTheme()">🌓</div>
+    <div class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Theme">🌓</div>
     <h1>Smart Bus Stand Enhancement</h1>
     <p>Reimagining Public Transportation Spaces</p>
   </header>
@@ -213,6 +213,16 @@
       </form>
     </section>
 
+    <section>
+      <h2>📧 Stay Updated</h2>
+      <div class="card">
+        <form action="https://formspree.io/f/your-form-id" method="POST">
+          <input type="email" name="email" placeholder="Your Email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
   </div>
 
   <footer>
@@ -243,13 +253,6 @@
       lightbox.style.display = 'none';
     }
   </script>
-  <section>
-  <h2>📧 Stay Updated</h2>
-  <div class="card">
-      <input type="email" name="email" placeholder="sanketkakede@gmail.com" required />
-    </form>
-  </div>
-</section>
 
 </body>
 </html>
