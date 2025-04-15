@@ -1,3 +1,30 @@
+<?php
+// Handle form submission before HTML output
+$mailSent = null;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $to = "your-email@example.com"; // <-- 🔁 Replace this with your actual email address
+
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $category = htmlspecialchars($_POST['category']);
+    $message = htmlspecialchars($_POST['message']);
+
+    $subject = "New Complaint - Smart Bus Stand";
+    $headers = "From: $email\r\n";
+    $headers .= "Reply-To: $email\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+    $body = "You received a new complaint:\n\n";
+    $body .= "Name: $name\n";
+    $body .= "Email: $email\n";
+    $body .= "Category: $category\n\n";
+    $body .= "Message:\n$message\n";
+
+    $mailSent = mail($to, $subject, $body, $headers);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,36 +89,12 @@
   </style>
 </head>
 <body>
-  <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $to = "sanketkakede@gmail.com"; // Replace with your email
-
-        $name = htmlspecialchars($_POST['name']);
-        $email = htmlspecialchars($_POST['email']);
-        $category = htmlspecialchars($_POST['category']);
-        $message = htmlspecialchars($_POST['message']);
-
-        $subject = "New Complaint - Smart Bus Stand";
-        $headers = "From: $email\r\n";
-        $headers .= "Reply-To: $email\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-        $body = "You received a new complaint from the Smart Bus Stand:\n\n";
-        $body .= "Name: $name\n";
-        $body .= "Email: $email\n";
-        $body .= "Category: $category\n\n";
-        $body .= "Complaint:\n$message\n";
-
-        $mailSent = mail($to, $subject, $body, $headers);
-    }
-  ?>
-
   <div class="container">
     <h2>Smart Bus Stand - Complaint Form</h2>
 
-    <?php if (isset($mailSent)): ?>
+    <?php if ($mailSent !== null): ?>
       <div class="message <?php echo $mailSent ? 'success' : 'error'; ?>">
-        <?php echo $mailSent ? 'Complaint submitted successfully. Thank you!' : 'Error sending complaint. Please try again later.'; ?>
+        <?php echo $mailSent ? '✅ Complaint submitted successfully. Thank you!' : '❌ Error sending complaint. Please try again later.'; ?>
       </div>
     <?php endif; ?>
 
