@@ -154,14 +154,7 @@
     #message {
       margin-top: 20px;
       font-weight: bold;
-    }
-
-    .success {
       color: #66bb6a;
-    }
-
-    .error {
-      color: #ef5350;
     }
 
     @media (max-width: 600px) {
@@ -216,15 +209,20 @@
       </div>
     </div>
 
-    <form id="complaintForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <input type="text" id="busStand" placeholder="Bus Stand Location" required>
-      <textarea id="complaintText" placeholder="Enter your complaint..." rows="4" required></textarea>
-      <input type="file" id="photo" accept="image/*">
+    <!-- 📤 Updated Complaint Form using Formspree -->
+    <form 
+      action="https://formspree.io/f/moqprgkl" 
+      method="POST" 
+      enctype="multipart/form-data"
+    >
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="busStand" placeholder="Bus Stand Location" required>
+      <textarea name="complaintText" placeholder="Enter your complaint..." rows="4" required></textarea>
+      <input type="file" name="photo" accept="image/*">
       <button type="submit">Submit Complaint</button>
     </form>
-    <div id="message"></div>
+    <div id="message">You'll get a confirmation email from Formspree if everything goes well.</div>
   </div>
 
   <!-- 🔁 3D Script -->
@@ -293,43 +291,6 @@
       camera.aspect = container.offsetWidth / container.offsetHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(container.offsetWidth, container.offsetHeight);
-    });
-  </script>
-
-  <!-- 📤 Form Submission -->
-  <script>
-    document.getElementById('complaintForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const form = document.getElementById('complaintForm');
-      const formData = new FormData();
-
-      formData.append('name', document.getElementById('name').value);
-      formData.append('email', document.getElementById('email').value);
-      formData.append('busStand', document.getElementById('busStand').value);
-      formData.append('complaintText', document.getElementById('complaintText').value);
-      formData.append('photo', document.getElementById('photo').files[0]);
-
-      const messageDiv = document.getElementById('message');
-
-      try {
-        const response = await fetch('http://localhost:5000/api/complaints', {
-          method: 'POST',
-          body: formData
-        });
-
-        if (response.ok) {
-          messageDiv.textContent = '✅ Thank you! Your complaint has been submitted.';
-          messageDiv.className = 'success';
-          form.reset();
-        } else {
-          messageDiv.textContent = '❌ Failed to submit complaint.';
-          messageDiv.className = 'error';
-        }
-      } catch (err) {
-        console.error(err);
-        messageDiv.textContent = '⚠ Error connecting to server.';
-        messageDiv.className = 'error';
-      }
     });
   </script>
 </body>
