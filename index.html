@@ -201,7 +201,7 @@
       </div>
       <div class="step-card">
         <h3>Step 3</h3>
-        <p>Upload an image of the issue (optional).</p>
+        <p>Paste an image link of the issue (optional).</p>
       </div>
       <div class="step-card">
         <h3>Step 4</h3>
@@ -212,14 +212,13 @@
     <!-- 📤 Complaint Form -->
     <form 
       action="https://formspree.io/f/xgvagbqn" 
-      method="POST" 
-      enctype="multipart/form-data"
+      method="POST"
     >
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <input type="text" name="busStand" placeholder="Bus Stand Location" required>
       <textarea name="complaintText" placeholder="Enter your complaint..." rows="4" required></textarea>
-      <input type="file" name="photo" accept="image/*">
+      <input type="text" name="imageLink" placeholder="Paste Image URL (optional)">
       <button type="submit">Submit Complaint</button>
     </form>
     <div id="message">You'll get a confirmation email from Formspree if everything goes well.</div>
@@ -295,5 +294,3 @@
   </script>
 </body>
 </html>
-
-
